@@ -1,0 +1,4 @@
+# TORNEOAPPBASQUETBACK
+- Api REST
+- MVC
+- Zod Validation
