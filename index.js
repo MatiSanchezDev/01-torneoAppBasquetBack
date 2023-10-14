@@ -1,7 +1,7 @@
 import express, {json} from "express"
 import { randomUUID } from 'node:crypto'
 import {readJSON} from "./utilities/readJson.js"
-
+import { validarJugador } from "./schemas/jugadores.js"
 
 const jugadoresJSON = readJSON('../json/jugadores.json')
 
@@ -25,56 +25,37 @@ app.get('/jugadores', (req, res) => {
 })
 
 app.post('/jugadores', (req, res)=> {
-  const {
-    jugador,
-    nacimiento,
-    dni,
-    email,
-    contacto,
-    posicionP,
-    posicionS,
-    puntaje,
-    imagen,
-    equipo,
-    equipoActual,
-    equipoNombre
-  } = req.body
+  const result = validarJugador(req.body)
+
+  if (result.error) {
+    return res.status(400).json({message: result.message.error})
+  }
 
   const newJugador = {
     id: randomUUID(),
-    jugador,
-    nacimiento,
-    dni,
-    email,
-    contacto,
-    posicionP,
-    posicionS,
-    puntaje,
-    imagen: imagen ?? null,
-    equipo: equipo ?? null,
-    equipoNombre: equipoNombre ?? null,
-    equipoActual
+    ...result.data
   }
+  
   jugadoresJSON.push(newJugador)
   res.status(201).json(newJugador)
 })
 
 // Ruta para jugadores SIN equipo
 app.get('/jugadores/sin-equipo', (req, res) => {
-    const jugadoresSinEquipo = jugadoresJSON.filter(jugador => !jugador.equipoActual);
+    const jugadoresSinEquipo = jugadoresJSON.filter(jugador => !jugador.equipoBoolean);
     res.json(jugadoresSinEquipo);
   });
   
 // Ruta para jugadores CON equipo
 app.get('/jugadores/con-equipo', (req, res) => {
-    const jugadoresConEquipo = jugadoresJSON.filter(jugador => jugador.equipoActual);
+    const jugadoresConEquipo = jugadoresJSON.filter(jugador => jugador.equipoBoolean);
     res.json(jugadoresConEquipo);
  });
 
 // Ruta para los jugadores dentro de un equipo
 app.get('/jugadores/equipo/:nombreEquipo', (req, res) => {
     const {nombreEquipo} = req.params;
-    const jugadoresEnEquipo = jugadoresJSON.filter(jugador => jugador.equipoActual && jugador.equipo === nombreEquipo);
+    const jugadoresEnEquipo = jugadoresJSON.filter(jugador => jugador.equipoBoolean && jugador.equipo === nombreEquipo);
   
     if (jugadoresEnEquipo.length > 0) {
       res.json(jugadoresEnEquipo);

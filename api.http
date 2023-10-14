@@ -17,14 +17,14 @@ Content-Type:  application/json
 {
     "jugador": "Nancy 2",
     "nacimiento": "2003-09-18",
-    "dni": "43514445",
+    "dni": 43514445,
     "email": "lauti@gmail.com",
-    "contacto": "3774556611",
+    "contacto": 3774556611,
     "posicionP": "Base",
     "posicionS": "Polifuncional",
-    "puntaje": "75",
+    "puntaje": 75,
     "imagen":"https://i6j5a8n9.rocketcdn.me/wp-content/uploads/2020/03/Jugadores-NBA-Coronavirus-COVID-19-1.jpg",
-    "equipoNombre": "Los Pichichen",
+    "equipoBoolean": "Los Pichichen",
     "equipoActual": false,
     "equipo": null
 }

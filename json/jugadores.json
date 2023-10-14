@@ -10,7 +10,7 @@
     "puntaje": "75",
     "imagen":"https://i6j5a8n9.rocketcdn.me/wp-content/uploads/2020/03/Jugadores-NBA-Coronavirus-COVID-19-1.jpg",
     "equipoNombre": null,
-    "equipoActual": false,
+    "equipoBoolean": false,
     "equipo": null
 },
 {
@@ -23,7 +23,7 @@
     "posicionP": "Base",
     "posicionS": "Polifuncional",
     "puntaje": "75",
-    "equipoActual": true,
+    "equipoBoolean": true,
     "equipo": "lospalos"
 },
 {
@@ -36,7 +36,7 @@
     "posicionP": "Base",
     "posicionS": "Polifuncional",
     "puntaje": "75",
-    "equipoActual": true,
+    "equipoBoolean": true,
     "equipo": "lospichichen",
     "equipoNombre": "Los Pichichen"
 },
@@ -50,7 +50,7 @@
     "posicionP": "Base",
     "posicionS": "Polifuncional",
     "puntaje": "75",
-    "equipoActual": true,
+    "equipoBoolean": true,
     "equipo": "lospichichen"
 }
 ]
