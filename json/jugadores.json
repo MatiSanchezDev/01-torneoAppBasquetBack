@@ -1,5 +1,5 @@
 [{
-    "id": 1,
+    "id": "1",
     "jugador": "Matias N. Sanchez",
     "nacimiento": "2003-09-17",
     "dni": "43514445",
@@ -14,7 +14,7 @@
     "equipo": null
 },
 {
-    "id": 2,
+    "id": "2",
     "jugador": "Lautaro Sanchez",
     "nacimiento": "2003-09-17",
     "dni": "43514445",
@@ -27,7 +27,7 @@
     "equipo": "lospalos"
 },
 {
-    "id": 3,
+    "id": "3",
     "jugador": "Orlando Sanchez",
     "nacimiento": "2003-09-17",
     "dni": "43514445",
@@ -41,7 +41,7 @@
     "equipoNombre": "Los Pichichen"
 },
 {
-    "id": 4,
+    "id": "4",
     "jugador": "Agustina Sanchez",
     "nacimiento": "2003-09-17",
     "dni": "43514445",

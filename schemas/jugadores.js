@@ -19,5 +19,6 @@ export function validarJugador (object) {
     return jugadorSchema.safeParse(object) 
 } 
 
-const v1 = 2
-const v2 = 2
+export function validarParcialJugador (object){
+    return jugadorSchema.partial().safeParse(object)
+}

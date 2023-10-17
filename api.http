@@ -28,3 +28,13 @@ Content-Type:  application/json
     "equipoActual": "Los negros",
     "equipo": "losnegros"
 }
+
+### Actualizar un Valor
+PATCH http://localhost:1234/jugadores/2
+Content-Type:  application/json
+
+{
+    "equipoBoolean": false,
+    "equipoActual": null,
+    "equipo": null
+}

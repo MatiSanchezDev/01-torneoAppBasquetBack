@@ -1,7 +1,7 @@
 import express, {json} from "express"
 import { randomUUID } from 'node:crypto'
 import {readJSON} from "./utilities/readJson.js"
-import { validarJugador } from "./schemas/jugadores.js"
+import { validarJugador, validarParcialJugador } from "./schemas/jugadores.js"
 
 const jugadoresJSON = readJSON('../json/jugadores.json')
 
@@ -38,6 +38,31 @@ app.post('/jugadores', (req, res)=> {
 
   jugadoresJSON.push(newJugador)
   res.status(201).json(newJugador)
+})
+
+app.patch('/jugadores/:id', (req, res) => {
+  const result = validarParcialJugador(req.body)
+  
+  if(!result.success) {
+    return res.status(400).json({message: "Error al validar los campos"})
+  }
+  
+  const {id} = req.params;
+  const jugadorFind = jugadoresJSON.findIndex(jugador => jugador.id === id) 
+
+  if (jugadorFind === -1) {
+    return res.status(400).json({message: "Jugador No encontrado"})
+  }
+
+  const actualizarJugador = {
+    ...jugadoresJSON[jugadorFind],
+    ...result.data
+  }
+
+  jugadoresJSON[jugadorFind] = actualizarJugador
+
+  return res.status(200).json(actualizarJugador)
+
 })
 
 // Ruta para jugadores SIN equipo
