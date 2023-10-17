@@ -27,15 +27,15 @@ app.get('/jugadores', (req, res) => {
 app.post('/jugadores', (req, res)=> {
   const result = validarJugador(req.body)
 
-  if (result.error) {
-    return res.status(400).json({message: result.message.error})
+  if(!result.success) {
+    return res.status(400).json({message: JSON.parse(result.message.error)})
   }
 
   const newJugador = {
     id: randomUUID(),
     ...result.data
   }
-  
+
   jugadoresJSON.push(newJugador)
   res.status(201).json(newJugador)
 })

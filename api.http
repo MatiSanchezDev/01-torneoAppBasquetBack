@@ -15,16 +15,16 @@ POST http://localhost:1234/jugadores
 Content-Type:  application/json
 
 {
-    "jugador": "Nancy 2",
-    "nacimiento": "2003-09-18",
-    "dni": 43514445,
-    "email": "lauti@gmail.com",
+    "jugador": "Alejandro E. Suarez",
+    "nacimiento": "1997-03-11",
+    "dni": 40281424,
+    "email": "Elniggaster@gmail.com",
     "contacto": 3774556611,
-    "posicionP": "Base",
-    "posicionS": "Polifuncional",
-    "puntaje": 75,
+    "posicionP": "lo que venga anga probre",
+    "posicionS": "Polifuncional pero mal en todo",
+    "puntaje": 5,
     "imagen":"https://i6j5a8n9.rocketcdn.me/wp-content/uploads/2020/03/Jugadores-NBA-Coronavirus-COVID-19-1.jpg",
-    "equipoBoolean": "Los Pichichen",
-    "equipoActual": false,
-    "equipo": null
+    "equipoBoolean": true,
+    "equipoActual": "Los negros",
+    "equipo": "losnegros"
 }
