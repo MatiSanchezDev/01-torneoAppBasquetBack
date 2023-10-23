@@ -8,7 +8,7 @@ GET http://localhost:1234/jugadores/sin-equipo
 GET http://localhost:1234/jugadores/con-equipo
 
 ### GET de jugadores y su equipo
-GET http://localhost:1234/jugadores/equipo/lospalos
+GET http://localhost:1234/jugadores/equipo/lospichichen
 
 ### POST de Jugador
 POST http://localhost:1234/jugadores
@@ -23,18 +23,21 @@ Content-Type:  application/json
     "posicionP": "lo que venga anga probre",
     "posicionS": "Polifuncional pero mal en todo",
     "puntaje": 5,
-    "imagen":"https://i6j5a8n9.rocketcdn.me/wp-content/uploads/2020/03/Jugadores-NBA-Coronavirus-COVID-19-1.jpg",
+    "imagen": null,
     "equipoBoolean": true,
     "equipoActual": "Los negros",
     "equipo": "losnegros"
 }
 
 ### Actualizar un Valor
-PATCH http://localhost:1234/jugadores/2
+PATCH http://localhost:1234/jugadores/1
 Content-Type:  application/json
 
 {
-    "equipoBoolean": false,
-    "equipoActual": null,
-    "equipo": null
+    "jugador": "Alejandro Suarez",
+    "dni": 5,
+    "email": "laSuarez@gmail.com"
 }
+
+### Eliminar jugador
+DELETE  http://localhost:1234/jugadores/3

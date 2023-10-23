@@ -1,93 +1,17 @@
 import express, {json} from "express"
-import { randomUUID } from 'node:crypto'
-import {readJSON} from "./utilities/readJson.js"
-import { validarJugador, validarParcialJugador } from "./schemas/jugadores.js"
+import { jugadoresRouter } from "./routes/jugadores.js"
 
-const jugadoresJSON = readJSON('../json/jugadores.json')
+import cors from "cors"
 
 const app = express()
 
-app.disable('x-powered-by')
+app.use(cors())
 app.use(json())
+app.disable('x-powered-by')
 
-// Ruta main
-app.get('/', (req, res) => {
-    res.json({
-        jugadoresAll:'http://localhost:1234/jugadores',
-        jugadoresConEquipo:'http://localhost:1234/con-equipo',
-        jugadoresSinEquipo:'http://localhost:1234/sin-equipo'
-    })
-})
 
-// Ruta para TODOS los jugadores
-app.get('/jugadores', (req, res) => {
-    res.json(jugadoresJSON)
-})
-
-app.post('/jugadores', (req, res)=> {
-  const result = validarJugador(req.body)
-
-  if(!result.success) {
-    return res.status(400).json({message: JSON.parse(result.message.error)})
-  }
-
-  const newJugador = {
-    id: randomUUID(),
-    ...result.data
-  }
-
-  jugadoresJSON.push(newJugador)
-  res.status(201).json(newJugador)
-})
-
-app.patch('/jugadores/:id', (req, res) => {
-  const result = validarParcialJugador(req.body)
-  
-  if(!result.success) {
-    return res.status(400).json({message: "Error al validar los campos"})
-  }
-  
-  const {id} = req.params;
-  const jugadorFind = jugadoresJSON.findIndex(jugador => jugador.id === id) 
-
-  if (jugadorFind === -1) {
-    return res.status(400).json({message: "Jugador No encontrado"})
-  }
-
-  const actualizarJugador = {
-    ...jugadoresJSON[jugadorFind],
-    ...result.data
-  }
-
-  jugadoresJSON[jugadorFind] = actualizarJugador
-
-  return res.status(200).json(actualizarJugador)
-
-})
-
-// Ruta para jugadores SIN equipo
-app.get('/jugadores/sin-equipo', (req, res) => {
-    const jugadoresSinEquipo = jugadoresJSON.filter(jugador => !jugador.equipoBoolean);
-    res.json(jugadoresSinEquipo);
-  });
-  
-// Ruta para jugadores CON equipo
-app.get('/jugadores/con-equipo', (req, res) => {
-    const jugadoresConEquipo = jugadoresJSON.filter(jugador => jugador.equipoBoolean);
-    res.json(jugadoresConEquipo);
- });
-
-// Ruta para los jugadores dentro de un equipo
-app.get('/jugadores/equipo/:nombreEquipo', (req, res) => {
-    const {nombreEquipo} = req.params;
-    const jugadoresEnEquipo = jugadoresJSON.filter(jugador => jugador.equipoBoolean && jugador.equipo === nombreEquipo);
-  
-    if (jugadoresEnEquipo.length > 0) {
-      res.json(jugadoresEnEquipo);
-    } else {
-      res.status(404).json({ error: 'Equipo no encontrado' });
-    }
-  });
+// Rutas Jugadores
+app.use('/jugadores', jugadoresRouter)
 
 const PORT = process.env.PORT ?? 1234
 
